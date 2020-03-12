@@ -15,34 +15,22 @@ import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 const store = createStore(combineReducers(reducers), compose(applyMiddleware(thunk)));
 const rootElement = document.getElementById("hospitallcare");
 
-// ReactGA.initialize('UA-137475238-1');
-ReactGA.initialize('UA-000000000-0');
-ReactGA.pageview(window.location.pathname + window.location.search);
-
-const tagManagerArgs = {
-    gtmId: 'GTM-KLSG744'
-}
-TagManager.initialize(tagManagerArgs)
 if (rootElement.hasChildNodes()) {
-    hydrate(
-        <Provider store = { store } >
-            <BrowserRouter >
+    hydrate( 
+	<Provider store = { store } >
+        <BrowserRouter >
+        <ScrollToTop >
+        <App />
+        </ScrollToTop>  </BrowserRouter>  </Provider>, rootElement);
+    }
+    else {
+        render( <Provider store = { store } >
+                <BrowserRouter >
                 <ScrollToTop >
-                    <App />
-                </ScrollToTop> 
-            </BrowserRouter> 
-        </Provider>, rootElement);
-  } else {
-    render(
-        <Provider store = { store } >
-            <BrowserRouter >
-                <ScrollToTop >
-                    <App />
-                </ScrollToTop> 
-            </BrowserRouter> 
-        </Provider>, rootElement);
-  }
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+                <App />
+                </ScrollToTop>  </BrowserRouter>  </Provider>, rootElement);
+            }
+            // If you want your app to work offline and load faster, you can change
+            // unregister() to register() below. Note this comes with some pitfalls.
+            // Learn more about service workers: https://bit.ly/CRA-PWA
+        serviceWorker.unregister();

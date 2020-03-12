@@ -1,5 +1,5 @@
 {
-    "name": "Testing hospitall",
+    "name": "Testing",
     "version": "0.1.0",
     "private": true,
     "homepage": "/",
@@ -44,7 +44,6 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "postbuild": "zip -r finddoctor.zip ./build/ react-snap",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
