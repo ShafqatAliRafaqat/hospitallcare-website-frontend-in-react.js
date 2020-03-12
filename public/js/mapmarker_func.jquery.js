@@ -1,0 +1,1 @@
+var myMarkers={markers:[{latitude:"51.511732",longitude:"-0.123270",icon:"img/map-marker.png"}]};$("#map").mapmarker({zoom:12,center:"Covent Garden London",markers:myMarkers});

@@ -1,0 +1,4 @@
+node_modules/
+src/Models/APIModel.js
+npm-debug.log
+Models

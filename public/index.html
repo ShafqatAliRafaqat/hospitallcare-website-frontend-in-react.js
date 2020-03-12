@@ -1,0 +1,189 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="CareALL,HospitALL,DoctorALL,book an appointment"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Hospitall Care">
+    <meta name="description" content="HospitALL-Find a Doctor | Book an appointment with best doctors | Find a Doctor by Specialization, Clinic or Doctors near to your location using filters | From the list of Doctors, click on any Doctor's name and View his/her Profile | On Doctor's Profile, select the Center, Treatment, date and slot of Appointment"
+    />
+
+    <title>HospitALL-Find a Doctor | Book an appointment with best doctors</title>
+
+    <!-- Favicons-->
+    <base href="/" />
+    <link rel="shortcut icon" href="web_imgs/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon" href="web_imgs/favicon.ico">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="web_imgs/favicon.ico">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="web_imgs/favicon.ico">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="web_imgs/favicon.ico">
+
+    <!-- BASE CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/our.css" rel="stylesheet">
+    <link href="css/menu.css" rel="stylesheet">
+    <link href="css/vendors.css" rel="stylesheet">
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/icon_fonts/css/all_icons_min.css" rel="stylesheet">
+
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/blog.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/alertify.min.css" />
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/themes/default.min.css" />
+    <!-- Modernizr -->
+
+</head>
+
+<body>
+    <div class="layer"></div>
+    <div id="preloader">
+        <div data-loader="circle-side"></div>
+    </div>
+    <div id="hospitallcare"></div>
+    <script src="js/modernizr.js"></script>
+    <script>
+        function toggleCodes(on) {
+            var obj = document.getElementById('icons');
+            if (on) {
+                obj.className += ' codesOn';
+            } else {
+                obj.className = obj.className.replace(' codesOn', '');
+            }
+        }
+    </script>
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: 31.4968216,
+                    lng: 74.42191939999998
+                },
+                zoom: 15
+            });
+            var card = document.getElementById('pac-card');
+            var input = document.getElementById('pac-input');
+            var types = document.getElementById('type-selector');
+            var strictBounds = document.getElementById('strict-bounds-selector');
+
+            map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo('bounds', map);
+
+            // Set the data fields to return when the user selects a place.
+            autocomplete.setFields(
+                ['address_components', 'geometry', 'icon', 'name']);
+
+            var infowindow = new google.maps.InfoWindow();
+            var infowindowContent = document.getElementById('infowindow-content');
+            infowindow.setContent(infowindowContent);
+            var marker = new google.maps.Marker({
+                map: map,
+                position: new google.maps.LatLng(31.4968216, 74.42191939999998),
+                anchorPoint: new google.maps.Point(0, -29)
+            });
+
+            autocomplete.addListener('place_changed', function() {
+                infowindow.close();
+                marker.setVisible(false);
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    window.alert("No details available for input: '" + place.name + "'");
+                    return;
+                }
+
+                // If the place has a geometry, then present it on a map.
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(17); // Why 17? Because it looks good.
+                }
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
+
+                infowindowContent.children['place-name'].textContent = 'Netsol Technologies';
+                infowindowContent.children['place-address'].textContent = 'Ghazi Road, Lahore';
+                infowindow.open(map, marker);
+
+                var place = autocomplete.getPlace();
+                // Then do whatever you want with them
+            });
+
+            // Sets a listener on a radio button to change the filter type on Places
+            // Autocomplete.
+            function setupClickListener(id, types) {
+                var radioButton = document.getElementById(id);
+                radioButton.addEventListener('click', function() {
+                    autocomplete.setTypes(types);
+                });
+            }
+
+            setupClickListener('changetype-all', []);
+            setupClickListener('changetype-address', ['address']);
+            setupClickListener('changetype-establishment', ['establishment']);
+            setupClickListener('changetype-geocode', ['geocode']);
+
+            document.getElementById('use-strict-bounds')
+                .addEventListener('click', function() {
+                    console.log('Checkbox clicked! New state=' + this.checked);
+                    autocomplete.setOptions({
+                        strictBounds: this.checked
+                    });
+                });
+
+        }
+    </script>
+    <div id="toTop"></div>
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="js/common_scripts.min.js"></script>
+    <script src="js/common_scripts.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/pw_strenght.js"></script>
+    <script src="assets/validate.js"></script>
+    <script src="js/mapmarker.jquery.js"></script>
+    <script src="js/mapmarker_contacts_func.js"></script>
+    <script src="js/owl.carousel.js"></script>
+    <script>
+        $(document).on('mouseenter', ".text-truncate", function() {
+            var $this = $(this);
+            if (this.offsetWidth < this.scrollWidth && !$this.attr('title')) {
+                $this.tooltip({
+                    title: $this.text(),
+                    placement: "bottom"
+                });
+                $this.tooltip('show');
+            }
+        });
+
+        $(document).ready(function() {
+            if (localStorage.firstVisit != "true") {
+                localStorage.firstVisit = "true";
+                $('#app_div').show();
+            } else {
+                $('#app_div').hide();
+            }
+            var lastclear = localStorage.getItem('lastclear'),
+                time_now = (new Date()).getTime();
+
+            if ((time_now - lastclear) > 1000 * 60 * 60 * 20) {
+                // localStorage.clear();
+                localStorage.firstVisit = "false";
+
+                localStorage.setItem('lastclear', time_now);
+            }
+        });
+    </script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+</body>
+
+</html>
